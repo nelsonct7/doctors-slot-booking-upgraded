@@ -1,0 +1,11 @@
+name: django-server-1
+channels:
+  - conda-forge
+dependencies:
+  - python=3.11.9
+  - pip
+  - nodejs=20
+  - git
+  - django
+  - djangorestframework
+  - django-cors-headers

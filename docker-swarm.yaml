@@ -1,0 +1,56 @@
+version: '3.7'
+
+services:
+  client-react-nginx:
+    image: nelsonct7/python-client-1:latest
+    build:
+      context: ./frontEnd/
+      dockerfile: Dockerfile
+    init: true
+    networks:
+      - frontend
+    ports:
+      - 8080:8080
+    restart: unless-stopped
+  
+  api-todo:
+    image: nelsonct7/python-server-1:latest
+    command: gunicorn backend.wsgi:application --bind 0.0.0.0:8000
+    init: true
+    depends_on:
+      - pg-db
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=example
+      - POSTGRES_HOST=pg-db
+      - POSTGRES_PORT=5432
+    networks:
+      - frontend
+      - backend
+    ports:
+      - 8000:8000
+    restart: unless-stopped
+
+  pg-db:
+    image: postgres
+    networks:
+      - backend
+    volumes:
+      - "postgres:/data/postgres"
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=example
+      - POSTGRES_HOST=pg-db
+      - POSTGRES_PORT=5432
+    ports:
+      - 5433:5432
+  
+    
+volumes:
+  postgres:
+
+networks:
+  frontend:
+  backend:
