@@ -40,11 +40,11 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'corsheaders',
     'rest_framework',
-    'todo',
     'appointment',
     'doctor',
     'patient',
-    'patient_history'
+    'patient_history',
+    'custom_auth.apps.AuthConfig'
 ]
 
 MIDDLEWARE = [

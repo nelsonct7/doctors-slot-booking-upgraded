@@ -10,7 +10,7 @@ class Appointment(models.Model):
     ]
     doctor = models.ForeignKey('doctor.Doctor', on_delete=models.PROTECT, related_name='appointments')
     patient = models.ForeignKey('patient.Patient', on_delete=models.PROTECT, related_name='appointments')
-    appointment_date = models.DateField()
+    date = models.DateField()
     time_slot=models.CharField(max_length=10)
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='pending')
     created_at = models.DateTimeField(auto_now_add=True)
@@ -19,5 +19,5 @@ class Appointment(models.Model):
     def _str_(self):
         return self
     class Meta:
-        ordering = ['-appointment_date']
+        ordering = ['-date']
         unique_together = ['doctor', 'date', 'time_slot']

@@ -6,7 +6,7 @@ from django.core.exceptions import PermissionDenied
 from datetime import datetime, timedelta
 
 from .models import Doctor
-from ..appointment.models import Appointment
+from appointment.models import Appointment
 from .serializers import DoctorSerializer
 
 def doctor_required(view_func):

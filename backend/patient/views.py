@@ -6,8 +6,8 @@ from django.core.exceptions import PermissionDenied
 
 from .models import Patient
 from .serializers import PatientSerializer
-from ..appointment.serializers import AppointmentSerializer
-from ..appointment.models import Appointment
+from appointment.serializers import AppointmentSerializer
+from appointment.models import Appointment
 
 def patient_required(view_func):
     def wrapper(request, *args, **kwargs):

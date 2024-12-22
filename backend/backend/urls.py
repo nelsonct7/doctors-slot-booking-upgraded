@@ -17,20 +17,17 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path,include
 from rest_framework import routers
-from todo import views
 from appointment import views as appointment_view
 from doctor import views as doctor_view
 from patient import views as patient_view
-from auth import views as auth_view
 
 router = routers.DefaultRouter()
-router.register(r'todo', views.TodoView, 'todo')
 router.register(r'appointment', appointment_view.AppointmentViewSet, 'appointment')
-router.register(r'doctor', doctor_view.DoctorView, 'doctor')
-router.register(r'patient', patient_view.PatientView, 'patient')
-router.register(r'auth', auth_view.SignupView, 'auth')
+router.register(r'doctor', doctor_view.DoctorViewSet, 'doctor')
+router.register(r'patient', patient_view.PatientViewSet, 'patient')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),
+    path('', include('custom_auth.urls')),
 ]
